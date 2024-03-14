@@ -1,0 +1,53 @@
+{% set name = "osslsigncode" %}
+{% set version = "2.8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  fn: "{{ name|lower }}-{{ version }}.tar.gz"
+  url: "https://github.com/mtrojnar/osslsigncode/archive/refs/tags/{{ version }}.tar.gz"
+  sha256: "d275d86bf0a8094e2c2ea451065299f965238be3cfaf3af6aff276302d759354"
+
+build:
+  number: 0
+  ignore_run_exports:     # [win]
+    - vs_2015_runtime     # [win]
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - cmake >=3.17
+    - ninja
+  host:
+    - libcurl
+    - openssl
+    - zlib
+
+test:
+  commands:
+    -  osslsigncode --version
+
+about:
+  home: https://github.com/mtrojnar/osslsigncode
+  license_file: LICENSE.txt
+  license:  GPL-3.0-or-later
+  summary: OpenSSL-based Authenticode signing for PE/MSI/Java CAB files
+  description: |
+    osslsigncode is a small tool that implements part of the functionality of
+    Microsoft's `signtool.exe` --- more specifically, Authenticode signing and
+    timestamping.  But osslsigncode is based on OpenSSL and cURL, and thus
+    should be able to compile and run on most platforms where these exist.
+    osslsigncode supports:
+
+      - Signing and timestamp PE (EXE/SYS/DLL/etc), CAB, CAT, and MSI files
+      - Adding a valid signature to a CAB file containing Java file
+      - Getting the timestamp through a proxy
+      - Signature verification, removal, and extraction
+
+  dev_url: https://github.com/mtrojnar/osslsigncode
+
+extra:
+  recipe-maintainers:
+    - chenghlee
