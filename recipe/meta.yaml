@@ -1,5 +1,5 @@
 {% set name = "osslsigncode" %}
-{% set version = "2.8" %}
+{% set version = "2.9" %}
 
 package:
   name: "{{ name|lower }}"
@@ -8,7 +8,7 @@ package:
 source:
   fn: "{{ name|lower }}-{{ version }}.tar.gz"
   url: "https://github.com/mtrojnar/osslsigncode/archive/refs/tags/{{ version }}.tar.gz"
-  sha256: "d275d86bf0a8094e2c2ea451065299f965238be3cfaf3af6aff276302d759354"
+  sha256: "3fe5488e442ad99f91410efeb7b029275366b5df9aa02371dcc89a8f8569ff55"
 
 build:
   number: 0
